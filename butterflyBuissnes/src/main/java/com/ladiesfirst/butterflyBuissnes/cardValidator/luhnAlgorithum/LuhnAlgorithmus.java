@@ -1,7 +1,10 @@
 package com.ladiesfirst.butterflyBuissnes.cardValidator.luhnAlgorithum;
 
+import org.springframework.stereotype.Component;
+
 import java.util.stream.IntStream;
 
+@Component
 public class LuhnAlgorithmus {
 
     public Boolean verifyLegitimatcy(String cardNo) {

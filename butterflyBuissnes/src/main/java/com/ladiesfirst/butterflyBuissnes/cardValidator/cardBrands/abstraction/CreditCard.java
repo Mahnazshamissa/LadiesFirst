@@ -2,12 +2,9 @@ package com.ladiesfirst.butterflyBuissnes.cardValidator.cardBrands.abstraction;
 
 public abstract class CreditCard {
 
-    public String validate(Long cardNumber) {
+    public boolean checkIfCardNumberIsValidvalidate(Long cardNumber) {
         String cardNumberStr = cardNumber.toString();
-        if (validCardNumberLength(cardNumberStr) && validCardNumberPrefix(cardNumberStr)) {
-            return cardType();
-        }
-        return "INVALID";
+        return validCardNumberLength(cardNumberStr) && validCardNumberPrefix(cardNumberStr);
     }
 
     protected abstract boolean validCardNumberLength(String cardNumber);

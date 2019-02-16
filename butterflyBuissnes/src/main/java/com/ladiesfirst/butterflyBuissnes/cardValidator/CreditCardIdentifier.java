@@ -32,8 +32,8 @@ public class CreditCardIdentifier {
         }
 
         Optional<String> cardNumberResult = creditCardList.stream()
-                .map(creditCard -> creditCard.validate(cardNumber))
-                .filter(result -> !result.equals(INVALID_CARD_NUMBER))
+                .filter(creditCard -> creditCard.checkIfCardNumberIsValidvalidate(cardNumber))
+                .map(CreditCard::cardType)
                 .findFirst();
 
         return cardNumberResult.orElse(INVALID_CARD_NUMBER);
