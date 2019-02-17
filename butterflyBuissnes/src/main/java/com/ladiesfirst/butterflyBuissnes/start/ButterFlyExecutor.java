@@ -1,6 +1,8 @@
 package com.ladiesfirst.butterflyBuissnes.start;
 
+import com.ladiesfirst.butterflyBuissnes.decoder.ParsedLineDecoder;
 import com.ladiesfirst.butterflyBuissnes.decoder.SevenSegmentDecoder;
+import com.ladiesfirst.butterflyBuissnes.dto.Document;
 import com.ladiesfirst.butterflyBuissnes.fileReader.FileLoader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,13 +17,14 @@ import java.util.stream.IntStream;
 public class ButterFlyExecutor {
 
     private final FileLoader fileLoader;
-    final private SevenSegmentDecoder sevenSegmentDecoder;
+    private final SevenSegmentDecoder sevenSegmentDecoder;
+    private final ParsedLineDecoder parsedLineDecoder;
 
-    public void read() {
-        List<String> allRows = fileLoader.asList("buterfly-business.txt");
+    public List<Document> readAndParseRows(String path) {
+        List<String> allRows = fileLoader.asList(path);
         List<List<String>> splitedRows = retrieveSplitedRowsFromRawinput(allRows);
-        List<String> parsedStrings = parseEachSplitedRowsIntoStrings(splitedRows);
-        parsedStrings.forEach(s -> System.out.println(s));
+        List<String> parsedRows = parseEachSplitedRowsIntoStrings(splitedRows);
+        return parsedLineDecoder.parseLinesAsDocuments(parsedRows);
     }
 
     private List<List<String>> retrieveSplitedRowsFromRawinput(List<String> allRows) {
